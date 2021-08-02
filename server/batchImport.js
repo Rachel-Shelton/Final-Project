@@ -1,8 +1,6 @@
-import { plants, posts } from "./toMongo";
+const { plants, posts } = require("./toMongo");
 
 const { MongoClient } = require("mongodb");
-const assert = require("assert");
-const fs = require("file-system");
 
 require("dotenv").config();
 const { MONGO_URI } = process.env;
@@ -12,7 +10,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
-const importingToMongo = () => {
+const importingToMongo = async () => {
   //do the language imports
   console.log(plants);
   console.log(posts);
@@ -38,3 +36,5 @@ const importingToMongo = () => {
   client.close();
   console.log("disconnected!");
 };
+
+importingToMongo()
