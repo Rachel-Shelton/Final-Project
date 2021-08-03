@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const {
   getPlants,
   getPlant,
-  updatePlant,
+  // updatePlant,
   getUsers,
   getUser,
   addUser,
@@ -17,7 +17,6 @@ const {
 const PORT = 4000;
 
 express()
-  .use("/assets", express.static(path.join(__dirname, "assets")))
   .use(express.json())
   .use(morgan("dev"))
 
@@ -26,12 +25,11 @@ express()
   .get("/plants", getPlants)
 
   //DONE
-  //console.log but item not found
   //get one plant
-  .get("/plant/:commonName", getPlant)
+  .get("/plant/:_id", getPlant)
 
   // //Change plant info, with updateOne in the function
-  // .patch("/plant/:commonName", updatePlant)
+  // .patch("/plant/:_id", updatePlant)
 
   //DONE
   // get all users
@@ -57,6 +55,7 @@ express()
   //add post to the db and feed
   .post("/post", addPost)
 
+  .use("/assets", express.static(path.join(__dirname, "assets")))
   .listen(PORT, () => {
     console.log(`listening on port ${PORT}`);
   });

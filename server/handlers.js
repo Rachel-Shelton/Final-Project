@@ -1,6 +1,6 @@
 "use strict";
 
-const {v4: uuidv4} = require("uuid")
+const { v4: uuidv4 } = require("uuid");
 
 const { MongoClient, ObjectId } = require("mongodb");
 
@@ -15,7 +15,7 @@ const options = {
 
 const getPlants = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
- 
+
   try {
     await client.connect();
     console.log("connected!");
@@ -26,11 +26,14 @@ const getPlants = async (req, res) => {
     console.log(plants);
 
     if (plants.length !== 0) {
- res.status(200).json({ status: 200, data: plants, message: "Plants Retrieved" });
+      res
+        .status(200)
+        .json({ status: 200, data: plants, message: "Plants Retrieved" });
     } else {
-       res.status(404).json({ status: 200, data: plants, message: "No plants to retrieve" });
+      res
+        .status(404)
+        .json({ status: 200, data: plants, message: "No plants to retrieve" });
     }
-   
   } catch (err) {
     console.log(err.message);
     res.status(500).json({ status: 500, data: req.body, message: err.message });
@@ -42,7 +45,7 @@ const getPlants = async (req, res) => {
 
 const getPlant = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
-  const {commonName} = req.params;
+  const { _id } = req.params;
 
   try {
     await client.connect();
@@ -50,12 +53,16 @@ const getPlant = async (req, res) => {
 
     const db = client.db("PlantParenthood");
 
-    const plant = await db.collection("plants").findOne({ commonName: commonName });
+    const plant = await db.collection("plants").findOne({ _id });
     console.log(plant);
     if (plant !== undefined) {
-res.status(200).json({ status: 200, data: plant, message: "Plant Retrieved" });
+      res
+        .status(200)
+        .json({ status: 200, data: plant, message: "Plant Retrieved" });
     } else {
-      res.status(404).json({ status: 404, message: "Unable to retrieve plant" });
+      res
+        .status(404)
+        .json({ status: 404, message: "Unable to retrieve plant" });
     }
   } catch (err) {
     console.log(err.message);
@@ -100,7 +107,9 @@ const getUsers = async (req, res) => {
     const users = await await db.collection("users").find().toArray();
     console.log(users);
 
-    res.status(200).json({ status: 200, data: users, message: "Users Retrieved" });
+    res
+      .status(200)
+      .json({ status: 200, data: users, message: "Users Retrieved" });
   } catch (err) {
     console.log(err.message);
     res.status(500).json({ status: 500, data: req.body, message: err.message });
@@ -112,6 +121,7 @@ const getUsers = async (req, res) => {
 //404 error
 const getUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
+  const { _id } = req.params;
 
   try {
     await client.connect();
@@ -119,12 +129,14 @@ const getUser = async (req, res) => {
 
     const db = client.db("PlantParenthood");
 
-    const user = await db.collection("users").findOne({_id: ObjectId(req.params._id) });
-  console.log("id", req.params._id)
+    const user = await db.collection("users").findOne({ _id: parseInt(_id) });
+    console.log("id", req.params._id);
     console.log(user);
 
-     if (user !== undefined) {
-res.status(200).json({ status: 200, data: user, message: "User Retrieved" });
+    if (user !== undefined) {
+      res
+        .status(200)
+        .json({ status: 200, data: user, message: "User Retrieved" });
     } else {
       res.status(404).json({ status: 404, message: "Unable to retrieve user" });
     }
@@ -138,7 +150,7 @@ res.status(200).json({ status: 200, data: user, message: "User Retrieved" });
 
 const addUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
-  const _id = uuidv4()
+  const _id = uuidv4();
 
   const { name, username, email, password, bio } = req.body;
   let newUser = {
@@ -188,7 +200,9 @@ const updateUser = async (req, res) => {
 
     const db = client.db("PlantParenthood");
 
-    const users = await db.collection("users").updateOne({_id: ObjectId(req.params._id)});
+    const users = await db
+      .collection("users")
+      .updateOne({ _id: parseInt(_id) });
     console.log(users);
     res.status(200).json({
       status: 200,
@@ -226,17 +240,18 @@ const getPosts = async (req, res) => {
 
 const addPost = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
-  const _id = uuidv4()
+  const _id = uuidv4();
 
-  const { username, timestamp, likedBy, propagatedBy, status, media } = req.body;
+  const { username, timestamp, likedBy, propagatedBy, status, media } =
+    req.body;
   let newPost = {
     _id,
     username,
-    timestamp, 
-    likedBy, 
-    propagatedBy, 
-    status, 
-    media 
+    timestamp,
+    likedBy,
+    propagatedBy,
+    status,
+    media,
   };
 
   try {

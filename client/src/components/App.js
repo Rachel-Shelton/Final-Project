@@ -3,12 +3,13 @@ import styled from "styled-components";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import GlobalStyles from "./GlobalStyles";
 import Community from "./Community";
 import Header from "./Header";
 import Footer from "./Footer";
 import Homepage from "./Homepage";
 import LandingPage from "./LandingPage";
-import Plant from "./Plant";
+import PlantDetails from "./PlantDetails";
 import Plants from "./Plants";
 import Feed from "./Feed";
 import Profile from "./Profile";
@@ -18,6 +19,7 @@ function App() {
   return (
     <>
       <Router>
+        <GlobalStyles />
         <Header />
         <Switch>
           <Route path="/landing">
@@ -33,7 +35,7 @@ function App() {
             <Plants />
           </Route>
           <Route path="/plant/:_id">
-            <Plant />
+            <PlantDetails />
           </Route>
           <Route path="/profile">
             <Profile />
