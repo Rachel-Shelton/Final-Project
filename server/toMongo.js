@@ -1,7 +1,9 @@
+const {v4: uuidv4}  = require("uuid")
+
 const plants = [
   // {
-  //   //with uuid?
-  //   id: "",
+  //   //with uu_id?
+//   id: uuidv4(),
   //   commonName: "",
   //   //optional
   //   synonyms: "",
@@ -26,7 +28,7 @@ const plants = [
   // },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Golden Pothos",
     //optional
     synonyms: "Pothos, Devil's Ivy, Taro Vine, Ivy Arum",
@@ -52,7 +54,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "String of Pearls",
     //optional
     synonyms: "Curio, Rosary Vine, String of Beads",
@@ -78,7 +80,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Aloe Vera",
     //optional
     synonyms: "Medicinal Aloe, Aloe barbadensis, Savila",
@@ -103,7 +105,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Monstera",
     //optional
     synonyms:
@@ -132,7 +134,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Pink Princess Philodendron",
     //optional
     synonyms: "Blushing Philodendron",
@@ -158,7 +160,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Snake Plant",
     //optional
     synonyms: "Goldbanded Snake Plant 'Twist', Sansevaria",
@@ -183,7 +185,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Boston Fern",
     //optional
     synonyms: "N/A",
@@ -208,7 +210,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "African Violet",
     //optional
     synonyms: "N/A",
@@ -233,7 +235,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Australian Hoya",
     //optional
     synonyms: "Wax Plant, Australian Waxflower, Porcelain Flower",
@@ -248,7 +250,7 @@ const plants = [
     //often, sometimes, rarely
     water: "sometimes",
     //soil, leca,water, air
-    growingMedium: "Aoil",
+    growingMedium: "Soil",
     //dramaqueen, moderate, independent
     care: "Moderate",
     //propogation methods
@@ -258,8 +260,8 @@ const plants = [
   },
 
   {
-    id: "",
-    commonName: "Fiddle-leaf Fig",
+    _id: uuidv4(),
+    commonName: "Fiddleleaf Fig",
     //optional
     synonyms: "Lyrate-Leaf Fig",
     binomialName: "Ficus lyrata",
@@ -284,7 +286,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Old Lady Cactus",
     //optional
     synonyms: "Old Lady Pincushion",
@@ -293,7 +295,7 @@ const plants = [
     image: "/assets/old-lady-cactus.jfif",
     //t/f if t but check if f make red
     //on click on characteristic second dropdown for order
-    petFriendly: "Unknown",
+    petFriendly: false,
     //sun, average, shade
     light: "full sun",
     //often, sometimes, rarely
@@ -309,7 +311,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Easter Cactus",
     //optional
     synonyms: "Violet Easter Lily Cactus",
@@ -318,7 +320,7 @@ const plants = [
     image: "/assets/easter-cactus.jfif",
     //t/f if t but check if f make red
     //on click on characteristic second dropdown for order
-    petFriendly: "Unknown",
+    petFriendly: false,
     //sun, average, shade
     light: "partial light",
     //often, sometimes, rarely
@@ -334,7 +336,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Bunny Ears Cactus",
     //optional
     synonyms: "Polka Dots, Honey Bunny, Alba Bunny Ears",
@@ -343,7 +345,7 @@ const plants = [
     image: "/assets/bunny-ears.jpg",
     //t/f if t but check if f make red
     //on click on characteristic second dropdown for order
-    petFriendly: "Unknown",
+    petFriendly: false,
     //sun, average, shade
     light: "partial",
     //often, sometimes, rarely
@@ -359,9 +361,8 @@ const plants = [
   },
 
   {
-    id: "",
-    commonName: "Lady's Slipper Orchid",
-    //optional
+    _id: uuidv4(),
+    commonName: "Lady's Slipper Orchid",  //optional
     synonyms: "Showy Lady's Slipper",
     binomialName: "Cypripedium reginae",
     origin: "Northern North America",
@@ -385,7 +386,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Westphalia Pansy",
     //optional
     synonyms: "Blue Zinc Violet High Calamine Pansy, Zinc Pansy",
@@ -410,7 +411,7 @@ const plants = [
   },
 
   {
-    id: "",
+    _id: uuidv4(),
     commonName: "Spider Plant",
     //optional
     synonyms: "Ribbon Plant, Anthericum, Spider Ivy",
@@ -437,12 +438,12 @@ const plants = [
 ];
 
 const posts = [
-  // id: {
-  //   id: "",
+
+  //{
   //   username: "",
-  //   timestamp: "2020-01-01T11:53:00+00:00",
+  //   timestamp: "2021-08-2",
   //   likedBy: [],
-  //   retweetedBy: [],
+  //   propagatedBy: [];
   //   status: ``,
   //   media: [
   //     {
@@ -452,20 +453,20 @@ const posts = [
   //   ],
   // },
   {
-    id: "",
+    _id: uuidv4(),
     username: "R_S",
-    timestamp: "2020-01-01T11:53:00+00:00",
+    timestamp: "2021-02-14",
     likedBy: [],
-    retweetedBy: [],
+    propagatedBy: [],
     status: `Just saw a Echinopsis (Echinopsis calochlora) in a video and I need to find one. Does anyone know of a plant nursery in the greater Montreal area that sells them? Thank you xx`,
     media: [],
   },
   {
-    id: "",
+    _id: uuidv4(),
     username: "Cat-J",
-    timestamp: "2020-01-01T11:53:00+00:00",
+    timestamp: "2021-05-17",
     likedBy: [],
-    retweetedBy: [],
+    propagatedBy: [],
     status: `Cats are a menace I swear (ironic innit). I left the room for 5 minutes and I come back to this... `,
     media: [
       {
@@ -475,11 +476,11 @@ const posts = [
     ],
   },
   {
-    id: "",
+    _id: uuidv4(),
     username: "L'arme",
-    timestamp: "2020-01-01T11:53:00+00:00",
+    timestamp: "2020-09-15",
     likedBy: [],
-    retweetedBy: [],
+    propagatedBy: [],
     status: `It's finally here! On my way to cross it off the wishlist<3`,
     media: [
       {
@@ -489,11 +490,11 @@ const posts = [
     ],
   },
   {
-    id: "",
+    _id: uuidv4(),
     username: "Amy JK",
-    timestamp: "2020-01-01T11:53:00+00:00",
+    timestamp: "2020-07-10",
     likedBy: [],
-    retweetedBy: [],
+    propagatedBy: [],
     status: `Saw this in a garden on my way to work. Can anyone identify it?`,
     media: [
       {
@@ -503,25 +504,25 @@ const posts = [
     ],
   },
   {
-    id: "",
+    _id: uuidv4(),
     username: "Amy JK",
-    timestamp: "2020-01-01T11:53:00+00:00",
+    timestamp: "2019-04-26",
     likedBy: [],
-    retweetedBy: [],
+    propagatedBy: [],
     status: `How are you all today? My orchid woke up and wanted to say hello lol`,
     media: [
       {
         type: "img",
-        url: "/assets/Orchid-Pt.2.jpg",
+        url: "/assets/Orch_id-Puuidv4()2.jpg",
       },
     ],
   },
   {
-    id: "",
+    _id: uuidv4(),
     username: "JonnyG",
-    timestamp: "2020-01-01T11:53:00+00:00",
+    timestamp: "2020-01-01",
     likedBy: [],
-    retweetedBy: [],
+    propagatedBy: [],
     status: `It's a great day to be a plant dad...look how healthy they all are.`,
     media: [
       {
@@ -531,11 +532,11 @@ const posts = [
     ],
   },
   {
-    id: "",
+    _id: uuidv4(),
     username: "L'arme",
-    timestamp: "2020-01-01T11:53:00+00:00",
+    timestamp: "2020-03-26",
     likedBy: [],
-    retweetedBy: [],
+    propagatedBy: [],
     status: `Building myself a little greenhouse. Any veteran plant parents have any advice?`,
     media: [],
   },

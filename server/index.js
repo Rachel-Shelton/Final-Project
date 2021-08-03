@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const {
   getPlants,
   getPlant,
+  updatePlant,
   getUsers,
   getUser,
   addUser,
@@ -20,31 +21,39 @@ express()
   .use(express.json())
   .use(morgan("dev"))
 
+  //DONE
   //get all plants
   .get("/plants", getPlants)
 
+  //DONE
+  //console.log but item not found
   //get one plant
-  .get("/plants/:_id", getPlant)
+  .get("/plant/:commonName", getPlant)
 
-  //Change plant info, with updateOne in the function
-  .patch("/plant/:_id", updateUser)
+  // //Change plant info, with updateOne in the function
+  // .patch("/plant/:commonName", updatePlant)
 
+  //DONE
   // get all users
   .get("/users", getUsers)
 
+  //How to format the _id in the url?
   // get one user
-  .get("/users/:_id", getUser)
+  .get("/user/:_id", getUser)
 
   //DONE
   //add user
   .post("/user", addUser)
 
+  //How to identify which field to change
   //Change user info, with updateOne in the function
   .patch("/user/:_id", updateUser)
 
+  //DONE
   //Potential, retrieve posts for the feed
   .get("/posts", getPosts)
 
+  //DONE
   //add post to the db and feed
   .post("/post", addPost)
 
