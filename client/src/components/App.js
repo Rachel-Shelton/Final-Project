@@ -14,6 +14,7 @@ import Plants from "./Plants";
 import Feed from "./Feed";
 import Profile from "./Profile";
 import SignUp from "./SignUp";
+import Settings from "./Settings";
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <Route path="/community">
             <Community />
+          </Route>
+          <Route path="/settings">
+            <Settings />
           </Route>
         </Switch>
         <Footer />

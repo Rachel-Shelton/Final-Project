@@ -152,14 +152,13 @@ const addUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   const _id = uuidv4();
 
-  const { name, username, email, password, bio } = req.body;
+  const { name, username, email, password } = req.body;
   let newUser = {
     _id,
     name,
     username,
     email,
     password,
-    bio,
   };
 
   try {
@@ -238,6 +237,33 @@ const getPosts = async (req, res) => {
   console.log("disconnected");
 };
 
+const getPost = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  const { _id } = req.params;
+
+  try {
+    await client.connect();
+    console.log("connected!");
+
+    const db = client.db("PlantParenthood");
+
+    const post = await db.collection("posts").findOne({ _id });
+    console.log(post);
+    if (post !== undefined) {
+      res
+        .status(200)
+        .json({ status: 200, data: post, message: "Post Retrieved" });
+    } else {
+      res.status(404).json({ status: 404, message: "Unable to retrieve post" });
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
+  }
+  client.close();
+  console.log("disconnected");
+};
+
 const addPost = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   const _id = uuidv4();
@@ -281,5 +307,6 @@ module.exports = {
   addUser,
   updateUser,
   getPosts,
+  getPost,
   addPost,
 };

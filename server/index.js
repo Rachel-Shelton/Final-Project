@@ -11,6 +11,7 @@ const {
   addUser,
   updateUser,
   getPosts,
+  getPost,
   addPost,
 } = require("./handlers.js");
 
@@ -50,6 +51,10 @@ express()
   //DONE
   //Potential, retrieve posts for the feed
   .get("/posts", getPosts)
+
+  //DONE
+  //Potential, retrieve posts for the feed
+  .get("/post/:_id", getPost)
 
   //DONE
   //add post to the db and feed
