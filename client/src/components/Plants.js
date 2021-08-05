@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Plants = () => {
   const [plants, setPlants] = useState(undefined);
+  const [filter, setFilter] = useState(undefined);
 
   useEffect(() => {
     fetch("/plants")
@@ -15,11 +16,55 @@ const Plants = () => {
   }, []);
   // console.log(plants);
 
+  if (filter) {
+    console.log("hello");
+    setFilter(!filter);
+    //how to style in here add cross in the corner or make border thicker
+  }
+
   return plants ? (
     <>
-      <div>Plants</div>
+      <Filter>
+        <UList>
+          <List
+            onClick={() => {
+              setFilter(true);
+            }}
+            role="radio"
+          >
+            Light
+          </List>
+          <List
+            onClick={() => {
+              setFilter(true);
+            }}
+            role="radio"
+          >
+            Water
+          </List>
+          <List
+            onClick={() => {
+              setFilter(true);
+              // if(plant.petFriendly) {
+              //   return plant
+              // }
+            }}
+            role="radio"
+          >
+            Pet-Friendly
+          </List>
+          <List
+            onClick={() => {
+              setFilter(true);
+            }}
+            role="radio"
+          >
+            Care
+          </List>
+        </UList>
+      </Filter>
 
-      <div>
+      <Feed>
         {plants.map((plant) => {
           //console.log(plant);
           // console.log("image", plant.image);
@@ -35,12 +80,39 @@ const Plants = () => {
             </NavLink>
           );
         })}
-      </div>
+      </Feed>
     </>
   ) : (
     <div>Loading...</div>
   );
 };
+
+const Filter = styled.div`
+  margin-top: 5vh;
+  display: flex;
+  /* background-color: red; */
+`;
+
+const UList = styled.ul`
+  margin-bottom: 2px;
+  display: flex;
+  width: 100%;
+  /* background-color: yellow; */
+`;
+
+const List = styled.li`
+  font-size: 12px;
+  list-style: none;
+  border: 1px solid black;
+  display: flex;
+  margin: 10px;
+  flex-direction: row;
+  padding: 1px 3px 1px 3px;
+  /* background-color: orange; */
+  cursor: pointer;
+`;
+
+const Feed = styled.div``;
 
 const NavLink = styled(Link)`
   text-decoration: none;
@@ -67,7 +139,9 @@ const Info = styled.div`
   margin-left: 70px;
 `;
 
-const Name = styled.div``;
+const Name = styled.div`
+  margin-top: 5px;
+`;
 
 const Origin = styled.div``;
 

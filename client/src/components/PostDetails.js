@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const PostDetails = () => {
   const { _id } = useParams();
-  console.log(_id);
+  // console.log(_id);
 
   const [chosenPost, setChosenPost] = useState(undefined);
 
@@ -22,7 +22,7 @@ const PostDetails = () => {
     }
   }, [_id]);
 
-  console.log(chosenPost);
+  // console.log(chosenPost);
 
   return chosenPost ? (
     <>
@@ -34,10 +34,10 @@ const PostDetails = () => {
           </Title>
         </Top>
         <Details>
+          <Media src={chosenPost.media[0].url} />
           <Timestamp>{chosenPost.timestamp}</Timestamp>
-          <Liked>{chosenPost.likedBy}</Liked>
-          <Shared>{chosenPost.propagatedBy}</Shared>
-          <Media>{chosenPost.mediay}</Media>
+          <Liked> Liked By: {chosenPost.likedBy}</Liked>
+          <Shared> Shared By: {chosenPost.propagatedBy}</Shared>
         </Details>
       </Entry>
     </>
@@ -52,7 +52,7 @@ const Loading = styled.div`
 
 const Entry = styled.div`
   position: relative;
-  background-color: var(--primary-color);
+  border: 2px solid var(--primary-color);
   margin-top: 10vh;
   height: 300px;
   width: 95vw;
@@ -99,6 +99,8 @@ const Liked = styled.div``;
 
 const Shared = styled.div``;
 
-const Media = styled.div``;
+const Media = styled.img`
+  width: 130px;
+`;
 
 export default PostDetails;

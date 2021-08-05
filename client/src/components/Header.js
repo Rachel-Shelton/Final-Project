@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import { useHistory } from "react-router-dom";
 
 const Header = () => {
-  // const handleLogOut = () => {
-  //   if (currentUser) {
-  //     setCurrentUser(undefined);
+  let history = useHistory();
 
-  // to landing page (here or in the tag?)
-  //history.push to landing page
-  //   }
-  // };
+  const [reveal, setReveal] = useState(false);
+
+  const showDropdown = () => {
+    setReveal((reveal) => {
+      return !reveal;
+    });
+  };
 
   return (
     <>
@@ -19,25 +21,26 @@ const Header = () => {
         <Search>
           <SearchBar />
         </Search>
-        <Home to="/">Plant Parenthood</Home>
+        <Home to="/home">Plant Parenthood</Home>
         {/* with a dropdown */}
         <div class="dropdown">
-          <select>
-            <option value="blank" id="dropdown">
-              User
-            </option>
-            <option>My Profile</option>
-            <option>Settings</option>
-            <option>Log Out</option>
-          </select>
-
-          {/* <User>User</User>
-          <Menu>
-            <Profile href="/profile">My Profile</Profile>
-            <Settings href="/settings">Settings</Settings>
-            {/* <Logout onClick={handleLogOut}>Log Out</Logout> */}
-          {/*<Logout>Log Out</Logout>
-          </Menu> */}
+          <User onClick={showDropdown} class="dropbtn">
+            User
+          </User>
+          {reveal && (
+            <Menu id="myDropdown" class="dropdown-content">
+              <Profile href="/profile">My Profile</Profile>
+              <Settings href="/settings">Settings</Settings>
+              <Logout
+                onClick={() => {
+                  // setCurrentUser(undefined);
+                  history.push("/");
+                }}
+              >
+                Log Out
+              </Logout>
+            </Menu>
+          )}
         </div>
       </Head>
     </>
@@ -66,9 +69,13 @@ const Home = styled(Link)`
 const User = styled.button`
   background-color: purple;
   border: none;
+  margin-right: 30px;
 `;
 
-const Menu = styled.div``;
+const Menu = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Profile = styled.a`
   text-decoration: none;

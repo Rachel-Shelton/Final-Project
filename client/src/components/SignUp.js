@@ -19,7 +19,7 @@ const SignUp = () => {
       // console.log("value", value);
       filledForm[key] = value;
     }
-    console.log("filledForm", filledForm);
+    // console.log("filledForm", filledForm);
     setUserData({ ...filledForm });
 
     // const validationResult = Validate(filledForm);
@@ -30,7 +30,7 @@ const SignUp = () => {
     //   setFormErrors(validationResult);
     // }
   };
-  console.log("userData2", userData);
+  // console.log("userData2", userData);
 
   useEffect(() => {
     if (userData) {
@@ -45,7 +45,7 @@ const SignUp = () => {
         }),
       }).then(() => {
         setUserData(undefined);
-        history.push("/");
+        history.push("/home");
       });
     }
   }, [userData]);

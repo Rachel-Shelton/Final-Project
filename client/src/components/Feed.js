@@ -47,9 +47,10 @@ const NavLink = styled(Link)`
 `;
 
 const Entry = styled.div`
+  position: relative;
   border: 1px solid var(--primary-color);
   margin: 5px;
-  height: 100px;
+  height: 120px;
   cursor: pointer;
 `;
 
@@ -57,6 +58,9 @@ const Name = styled.div``;
 
 const Status = styled.div``;
 
-const Timestamp = styled.div``;
+const Timestamp = styled.div`
+  position: absolute;
+  bottom: 0px;
+`;
 
 export default Feed;

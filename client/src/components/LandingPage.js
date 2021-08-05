@@ -10,10 +10,10 @@ const LandingPage = () => {
         <Username placeholder="Username"></Username>
         <Password placeholder="Password"></Password>
         <Submit>
-          {/* {validUsername && validPassword ? (<Auth to="/">Log In</Auth>) : (
-<Auth to="/" isDisabled>Log In</Auth>
+          {/* {validUsername && validPassword ? (<Auth to="/home">Log In</Auth>) : (
+<Auth to="/home" isDisabled>Log In</Auth>
           )} */}
-          <Auth to="/">Log In</Auth>
+          <Auth to="/home">Log In</Auth>
         </Submit>
       </Login>
       <Signup>

@@ -12,16 +12,14 @@ const options = {
 
 const importingToMongo = async () => {
   //do the language imports
-  console.log(plants);
-  console.log(posts);
+  // console.log(plants);
+  // console.log(posts);
 
   const client = new MongoClient(MONGO_URI, options);
 
   await client.connect();
   console.log("connected!");
   try {
-    console.log();
-
     const db = client.db("PlantParenthood");
 
     await db.collection("posts").insertMany(posts);
@@ -37,4 +35,4 @@ const importingToMongo = async () => {
   console.log("disconnected!");
 };
 
-importingToMongo()
+importingToMongo();

@@ -20,12 +20,12 @@ const Search = () => {
     searchList &&
     searchList.filter((entry) => {
       if (searchValue.length >= 3) {
-        console.log(entry);
+        // console.log(entry);
         return entry.commonName
           .toLowerCase()
           .includes(searchValue.toLowerCase());
       } else {
-        return "Uh-Oh. Looks like we couldn't find what you were looking for.";
+        return "";
       }
     });
 
@@ -43,37 +43,38 @@ const Search = () => {
             onChange={(ev) => setSearchValue(ev.target.value)}
             disabled={!searchList}
           />
+          <UList>
+            {suggestionMatch && (
+              <Container>
+                {suggestionMatch.map((suggestion) => {
+                  const plant = suggestion.commonName;
+                  return (
+                    <div
+                      onClick={() => {
+                        getPlantPage(suggestion._id);
+                      }}
+                    >
+                      <List key={suggestion._id}>
+                        <div>
+                          <span>{plant}</span>
+                        </div>
+                      </List>
+                    </div>
+                  );
+                })}
+              </Container>
+            )}
+          </UList>
         </SearchDiv>
-        <UList>
-          {suggestionMatch && (
-            <Container>
-              {suggestionMatch.map((suggestion) => {
-                const plant = suggestion.commonName;
-                return (
-                  <div
-                    onClick={() => {
-                      getPlantPage(suggestion._id);
-                    }}
-                  >
-                    <List>
-                      <span>{plant}</span>
-                    </List>
-                  </div>
-                );
-              })}
-            </Container>
-          )}
-        </UList>
       </div>
     </>
   );
 };
 
 const SearchDiv = styled.div`
-  display: flex;
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     display: none;
-  }
+  } */
 `;
 
 const Input = styled.input`
@@ -85,32 +86,24 @@ const Input = styled.input`
   }
 `;
 
-const UList = styled.ul`
+const UList = styled.div`
   position: absolute;
   max-height: 200px;
   overflow-y: scroll;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 10px;
   background: white;
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 0px;
   }
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
+  /* background-color: red; */
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  /* background-color: orange; */
+  /* float: left; */
+`;
 
-const List = styled.li`
-  list-style-type: none;
+const List = styled.div`
+  /* margin-left: -30px; */
   width: 200px;
   font-size: 12px;
   padding: 2.5px 5px;

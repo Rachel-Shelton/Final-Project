@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const PlantDetails = () => {
   const { _id } = useParams();
-  console.log(_id);
+  // console.log(_id);
 
   const [chosenPlant, setChosenPlant] = useState(undefined);
 
@@ -13,7 +13,7 @@ const PlantDetails = () => {
       fetch(`/plant/${_id}`)
         .then((res) => res.json())
         .then(({ data }) => {
-          console.log("chosen", data);
+          // console.log("chosen", data);
           setChosenPlant(data);
         })
         .catch((err) => {

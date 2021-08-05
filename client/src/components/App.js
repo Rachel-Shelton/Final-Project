@@ -15,6 +15,7 @@ import Feed from "./Feed";
 import Profile from "./Profile";
 import SignUp from "./SignUp";
 import Settings from "./Settings";
+import PostDetails from "./PostDetails";
 
 function App() {
   return (
@@ -23,14 +24,17 @@ function App() {
         <GlobalStyles />
         <Header />
         <Switch>
-          <Route path="/landing">
+          <Route exact path="/">
             <LandingPage />
           </Route>
-          <Route exact path="/">
+          <Route path="/home">
             <Homepage />
           </Route>
           <Route path="/feed">
             <Feed />
+          </Route>
+          <Route path="/post/:_id">
+            <PostDetails />
           </Route>
           <Route path="/plants">
             <Plants />

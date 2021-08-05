@@ -7,9 +7,9 @@ import Feed from "./Feed";
 const Homepage = () => {
   return (
     <>
-      <NavBar>
+      {/* <NavBar>
         <Navigation />
-      </NavBar>
+      </NavBar> */}
       <Container>
         <PlantFeed>
           <Plants />
