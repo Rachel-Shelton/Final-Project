@@ -34,7 +34,7 @@ const PostDetails = () => {
           </Title>
         </Top>
         <Details>
-          <Media src={chosenPost.media[0].url} />
+          {chosenPost.media[0] && <Media src={chosenPost.media[0].url} />}
           <Timestamp>{chosenPost.timestamp}</Timestamp>
           <Liked> Liked By: {chosenPost.likedBy}</Liked>
           <Shared> Shared By: {chosenPost.propagatedBy}</Shared>

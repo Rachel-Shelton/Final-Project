@@ -17,7 +17,7 @@ const Feed = () => {
 
   return posts ? (
     <>
-      <div>Feed</div>
+      <Title>Feed</Title>
       <div>
         {posts.map((post) => {
           //console.log(post);
@@ -37,6 +37,11 @@ const Feed = () => {
     <div>Loading...</div>
   );
 };
+
+const Title = styled.h1`
+  display: flex;
+  justify-content: center;
+`;
 
 const NavLink = styled(Link)`
   text-decoration: none;

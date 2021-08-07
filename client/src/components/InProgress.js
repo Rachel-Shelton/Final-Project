@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { BiTrafficCone } from "react-icons/bi";
+import { GiFlowerPot } from "react-icons/gi";
 
 const Progress = () => {
   return (
     <>
       <Placeholder>
-        <BiTrafficCone />
-        This Page Is Under Construction
-        <BiTrafficCone />
+        <GiFlowerPot />
+        &nbsp;This Page Is Under Construction&nbsp;
+        <GiFlowerPot />
       </Placeholder>
     </>
   );

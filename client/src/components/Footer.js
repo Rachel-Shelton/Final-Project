@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
@@ -14,9 +16,9 @@ const Footer = () => {
           <Support>
             <strong>Help and Support:</strong>
             <div>FAQ</div>
-            <div>Tracking your order</div>
-            <div>Shipping Information</div>
-            <div>How to become a seller</div>
+            <NurseryLink to="/nurseryFinder">
+              Find a plant nursery near you
+            </NurseryLink>
           </Support>
           <Links>
             <strong>Company Info:</strong>
@@ -49,6 +51,7 @@ const Footer = () => {
 
 const Container = styled.div`
   position: relative;
+  bottom: 0px;
   width: 100%;
   height: 20vh;
   font-size: 10px;
@@ -64,6 +67,14 @@ const Horizontal = styled.div`
 `;
 
 const Contact = styled.div``;
+
+const NurseryLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+  :visited {
+    color: black;
+  }
+`;
 
 const Links = styled.div``;
 

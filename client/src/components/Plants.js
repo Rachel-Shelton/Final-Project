@@ -24,6 +24,7 @@ const Plants = () => {
 
   return plants ? (
     <>
+      <Title>Find A Plant</Title>
       <Filter>
         <UList>
           <List
@@ -86,6 +87,11 @@ const Plants = () => {
     <div>Loading...</div>
   );
 };
+
+const Title = styled.h1`
+  display: flex;
+  justify-content: center;
+`;
 
 const Filter = styled.div`
   margin-top: 5vh;

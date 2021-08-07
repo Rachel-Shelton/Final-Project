@@ -16,6 +16,7 @@ import Profile from "./Profile";
 import SignUp from "./SignUp";
 import Settings from "./Settings";
 import PostDetails from "./PostDetails";
+import NurseryFinder from "./NurseryFinder.js";
 
 function App() {
   return (
@@ -53,6 +54,9 @@ function App() {
           </Route>
           <Route path="/settings">
             <Settings />
+          </Route>
+          <Route path="/nurseryFinder">
+            <NurseryFinder />
           </Route>
         </Switch>
         <Footer />
