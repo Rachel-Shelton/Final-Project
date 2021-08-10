@@ -30,7 +30,7 @@ const Footer = () => {
             <strong>Contact Us:</strong>
             <div>Email: contact@plantparenthood.info</div>
             <div>Phone Number: 1(800)GREEN-TB</div>
-            <div>Address:</div>
+            <div>Address: 1221 Rue Tulipe, Montreal, QC, Canada T0L1P3</div>
           </Contact>
         </Horizontal>
         <SocialMedia>
@@ -50,14 +50,15 @@ const Footer = () => {
 };
 
 const Container = styled.div`
-  position: relative;
-  bottom: 0px;
-  width: 100%;
-  height: 20vh;
+  position: absolute;
+  bottom: 2px;
+  width: 99.5vw;
+  height: 16vh;
   font-size: 10px;
-  margin-top: 10vh;
-  margin-bottom: 0px;
-  /* background-color: lightgrey; */
+  margin-top: 1vh;
+  margin-bottom: 2px;
+  margin-left: -4px;
+  background-color: lightgrey;
 `;
 
 const Horizontal = styled.div`

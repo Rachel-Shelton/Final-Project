@@ -42,6 +42,7 @@ const Search = () => {
             value={searchValue}
             onChange={(ev) => setSearchValue(ev.target.value)}
             disabled={!searchList}
+            placeholder="Search"
           />
           <UList>
             {suggestionMatch && (
@@ -79,7 +80,7 @@ const SearchDiv = styled.div`
 
 const Input = styled.input`
   width: 200px;
-  border: 1px solid #555;
+  border: 1px solid lightgrey;
   padding: 5px;
   &:focus {
     outline: none;

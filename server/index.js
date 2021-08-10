@@ -13,6 +13,7 @@ const {
   getPosts,
   getPost,
   addPost,
+  Login,
 } = require("./handlers.js");
 
 const PORT = 4000;
@@ -59,6 +60,8 @@ express()
   //DONE
   //add post to the db and feed
   .post("/post", addPost)
+
+  .post("/user/login", Login)
 
   .use("/assets", express.static(path.join(__dirname, "assets")))
   .listen(PORT, () => {

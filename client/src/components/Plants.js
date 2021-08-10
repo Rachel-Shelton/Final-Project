@@ -24,69 +24,76 @@ const Plants = () => {
 
   return plants ? (
     <>
-      <Title>Find A Plant</Title>
-      <Filter>
-        <UList>
-          <List
-            onClick={() => {
-              setFilter(true);
-            }}
-            role="radio"
-          >
-            Light
-          </List>
-          <List
-            onClick={() => {
-              setFilter(true);
-            }}
-            role="radio"
-          >
-            Water
-          </List>
-          <List
-            onClick={() => {
-              setFilter(true);
-              // if(plant.petFriendly) {
-              //   return plant
-              // }
-            }}
-            role="radio"
-          >
-            Pet-Friendly
-          </List>
-          <List
-            onClick={() => {
-              setFilter(true);
-            }}
-            role="radio"
-          >
-            Care
-          </List>
-        </UList>
-      </Filter>
+      <Container>
+        <Title>Find A Plant</Title>
+        <Filter>
+          <UList>
+            <List
+              onClick={() => {
+                setFilter(true);
+              }}
+              role="radio"
+            >
+              Light
+            </List>
+            <List
+              onClick={() => {
+                setFilter(true);
+              }}
+              role="radio"
+            >
+              Water
+            </List>
+            <List
+              onClick={() => {
+                setFilter(true);
+                // if(plant.petFriendly) {
+                //   return plant
+                // }
+              }}
+              role="radio"
+            >
+              Pet-Friendly
+            </List>
+            <List
+              onClick={() => {
+                setFilter(true);
+              }}
+              role="radio"
+            >
+              Care
+            </List>
+          </UList>
+        </Filter>
 
-      <Feed>
-        {plants.map((plant) => {
-          //console.log(plant);
-          // console.log("image", plant.image);
-          return (
-            <NavLink to={`/plant/${plant._id}`}>
-              <Entry>
-                <Image src={plant.image} />
-                <Info>
-                  <Name>Name: {plant.commonName}</Name>
-                  <Origin>Origin: {plant.origin}</Origin>
-                </Info>
-              </Entry>
-            </NavLink>
-          );
-        })}
-      </Feed>
+        <Feed>
+          {plants.map((plant) => {
+            //console.log(plant);
+            // console.log("image", plant.image);
+            return (
+              <NavLink to={`/plant/${plant._id}`}>
+                <Entry>
+                  <Image src={plant.image} />
+                  <Info>
+                    <Name>Name: {plant.commonName}</Name>
+                    <Origin>Origin: {plant.origin}</Origin>
+                  </Info>
+                </Entry>
+              </NavLink>
+            );
+          })}
+        </Feed>
+      </Container>
     </>
   ) : (
     <div>Loading...</div>
   );
 };
+
+const Container = styled.div`
+  margin: 5vh 2px 0px 5px;
+  background-color: lightblue;
+`;
 
 const Title = styled.h1`
   display: flex;
@@ -94,16 +101,14 @@ const Title = styled.h1`
 `;
 
 const Filter = styled.div`
-  margin-top: 5vh;
   display: flex;
-  /* background-color: red; */
+  margin-top: -25px;
 `;
 
 const UList = styled.ul`
   margin-bottom: 2px;
   display: flex;
   width: 100%;
-  /* background-color: yellow; */
 `;
 
 const List = styled.li`

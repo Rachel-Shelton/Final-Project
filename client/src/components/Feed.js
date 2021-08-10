@@ -17,26 +17,33 @@ const Feed = () => {
 
   return posts ? (
     <>
-      <Title>Feed</Title>
-      <div>
-        {posts.map((post) => {
-          //console.log(post);
-          return (
-            <NavLink to={`/post/${post._id}`}>
-              <Entry>
-                <Name>{post.username}</Name>
-                <Status>{post.status}</Status>
-                <Timestamp>{post.timestamp}</Timestamp>
-              </Entry>
-            </NavLink>
-          );
-        })}
-      </div>
+      <Container>
+        <Title>Feed</Title>
+        <div>
+          {posts.map((post) => {
+            //console.log(post);
+            return (
+              <NavLink to={`/post/${post._id}`}>
+                <Entry>
+                  <Name>{post.username}</Name>
+                  <Status>{post.status}</Status>
+                  <Timestamp>{post.timestamp}</Timestamp>
+                </Entry>
+              </NavLink>
+            );
+          })}
+        </div>
+      </Container>
     </>
   ) : (
     <div>Loading...</div>
   );
 };
+
+const Container = styled.div`
+  margin: 5vh 2px 0px 5px;
+  background-color: lightblue;
+`;
 
 const Title = styled.h1`
   display: flex;
@@ -56,6 +63,7 @@ const Entry = styled.div`
   border: 1px solid var(--primary-color);
   margin: 5px;
   height: 120px;
+  //how to make height change with inner text?
   cursor: pointer;
 `;
 

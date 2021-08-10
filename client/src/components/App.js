@@ -1,5 +1,4 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useContext } from "react";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -17,49 +16,59 @@ import SignUp from "./SignUp";
 import Settings from "./Settings";
 import PostDetails from "./PostDetails";
 import NurseryFinder from "./NurseryFinder.js";
+import { UserContext } from "./UserContext";
 
 function App() {
+  const { currentUser } = useContext(UserContext);
   return (
     <>
       <Router>
         <GlobalStyles />
-        <Header />
         <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <Route path="/home">
-            <Homepage />
-          </Route>
-          <Route path="/feed">
-            <Feed />
-          </Route>
-          <Route path="/post/:_id">
-            <PostDetails />
-          </Route>
-          <Route path="/plants">
-            <Plants />
-          </Route>
-          <Route path="/plant/:_id">
-            <PlantDetails />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/signup">
-            <SignUp />
-          </Route>
-          <Route path="/community">
-            <Community />
-          </Route>
-          <Route path="/settings">
-            <Settings />
-          </Route>
           <Route path="/nurseryFinder">
             <NurseryFinder />
           </Route>
+          <div>
+            <Route exact path="/">
+              <LandingPage />
+            </Route>
+            <div>
+              <Route path="/signup">
+                <SignUp />
+              </Route>
+              {currentUser && (
+                <div>
+                  <Header />
+                  <Route path="/home">
+                    <Homepage />
+                  </Route>
+                  <Route path="/feed">
+                    <Feed />
+                  </Route>
+                  <Route path="/post/:_id">
+                    <PostDetails />
+                  </Route>
+                  <Route path="/plants">
+                    <Plants />
+                  </Route>
+                  <Route path="/plant/:_id">
+                    <PlantDetails />
+                  </Route>
+                  <Route path="/profile">
+                    <Profile />
+                  </Route>
+                  <Route path="/community">
+                    <Community />
+                  </Route>
+                  <Route path="/settings">
+                    <Settings />
+                  </Route>
+                </div>
+              )}
+            </div>
+            <Footer />
+          </div>
         </Switch>
-        <Footer />
       </Router>
     </>
   );

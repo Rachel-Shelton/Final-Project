@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useState, useEffect, createContext } from "react";
 
-const { v4: uuidv4 } = require("uuid");
+export const UserContext = createContext(null);
 
-export const ItemContext = createContext();
+export const UserProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [users, setUsers] = useState(undefined);
 
-export const ItemProvider = ({ children }) => {
-  return <ItemContext.Provider value={{}}>{children}</ItemContext.Provider>;
+  useEffect(() => {
+    fetch("/user/login")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        let userStorage = localStorage.getItem("loggedIn");
+        if (userStorage) {
+          if (data) {
+            setCurrentUser(data);
+          }
+        }
+      });
+  }, []);
+
+  console.log(currentUser);
+
+  return (
+    <UserContext.Provider
+      value={{
+        currentUser,
+        setCurrentUser,
+        users,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 };

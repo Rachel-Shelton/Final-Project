@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "./UserContext";
 
 const Header = () => {
   let history = useHistory();
 
+  const { setCurrentUser, currentUser } = useContext(UserContext);
   const [reveal, setReveal] = useState(false);
 
   const showDropdown = () => {
@@ -22,15 +24,14 @@ const Header = () => {
           <SearchBar />
         </Search>
         <Home to="/home">Plant Parenthood</Home>
-        {/* with a dropdown */}
         <div class="dropdown">
           <User onClick={showDropdown} class="dropbtn">
             User
           </User>
           {reveal && (
             <Menu id="myDropdown" class="dropdown-content">
-              <Profile href="/profile">My Profile</Profile>
-              <Settings href="/settings">Settings</Settings>
+              <Profile to="/profile">My Profile</Profile>
+              <Settings to="/settings">Settings</Settings>
               <Logout
                 onClick={() => {
                   // setCurrentUser(undefined);
@@ -49,11 +50,12 @@ const Header = () => {
 
 const Head = styled.div`
   position: fixed;
+  margin-top: 5px;
   top: 0;
   display: flex;
   justify-content: space-between;
-  background-color: purple;
-  width: 95vw;
+  background-color: lightgrey;
+  width: 97vw;
 `;
 
 const Search = styled.div``;
@@ -67,9 +69,10 @@ const Home = styled(Link)`
 `;
 
 const User = styled.button`
-  background-color: purple;
+  background-color: lightgrey;
   border: none;
   margin-right: 30px;
+  height: 25px;
 `;
 
 const Menu = styled.div`
@@ -77,14 +80,14 @@ const Menu = styled.div`
   flex-direction: column;
 `;
 
-const Profile = styled.a`
+const Profile = styled(Link)`
   text-decoration: none;
   :visited {
     color: black;
   }
 `;
 
-const Settings = styled.a`
+const Settings = styled(Link)`
   text-decoration: none;
   :visited {
     color: black;
@@ -92,7 +95,7 @@ const Settings = styled.a`
 `;
 
 const Logout = styled.button`
-  background-color: purple;
+  background-color: lightgrey;
   border: none;
 `;
 

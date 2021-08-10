@@ -298,6 +298,45 @@ const addPost = async (req, res) => {
   console.log("disconnected");
 };
 
+const Login = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+
+  let givenUsername = req.body.username;
+  let givenPassword = req.body.password;
+
+  //get user from mdb using given username
+  //look up user with given user name and compare given password to password in mdb
+  //if (p=p, resmjson{data: user form db} else {message: "Wrong Password"} or "User not found")}
+  try {
+    await client.connect();
+    console.log("connected!");
+
+    const db = client.db("PlantParenthood");
+
+    const cUser = await db.collection("users").findOne({ username });
+    console.log(cUser);
+
+    if (givenUsername.toLowerCase() === username.toLowerCase()) {
+      if (givenPassword === user.password) {
+        res
+          .status(200)
+          .json({ status: 200, data: cUser, message: "User Logged In" });
+      } else {
+        res
+          .status(404)
+          .json({ status: 200, data: req.body, message: "Password Incorrect" });
+      }
+    } else {
+      res.status(404).json({ status: 500, message: "Account Not Found" });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
+  }
+  client.close();
+  console.log("disconnected");
+};
+
 module.exports = {
   getPlants,
   getPlant,
@@ -309,4 +348,5 @@ module.exports = {
   getPosts,
   getPost,
   addPost,
+  Login,
 };

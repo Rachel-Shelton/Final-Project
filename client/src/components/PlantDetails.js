@@ -121,8 +121,6 @@ const Details = styled.div`
 
 const Origin = styled.div``;
 
-const Pets = styled.div``;
-
 const Care = styled.div``;
 
 const Water = styled.div``;

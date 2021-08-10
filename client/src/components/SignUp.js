@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+// import Validate from "./ValidateForm";
+
+import background from "../background.jpg";
 
 const SignUp = () => {
   let history = useHistory();
@@ -52,30 +55,67 @@ const SignUp = () => {
 
   return (
     <>
-      <Form id="signupForm">
-        <Input name="name" placeholder="Full Name" type="text" />
-        <Input name="username" placeholder="Username" type="text" />
-        <Input name="email" placeholder="Email" type="email" />
-        <Input name="password" placeholder="Password" type="password" />
-        <Input
-          name="ConfPassword"
-          placeholder="Confirm Password"
-          type="password"
-        />
-        <Submit onClick={handleSubmit}>Sign Up!</Submit>
-      </Form>
+      <Container style={{ backgroundImage: `url(${background})` }}>
+        <Center>
+          <NewAcct>Create New Account</NewAcct>
+          <Form id="signupForm">
+            <Input name="name" placeholder="Full Name" type="text" />
+            <Input name="username" placeholder="Username" type="text" />
+            <Input name="email" placeholder="Email" type="email" />
+            <Input name="password" placeholder="Password" type="password" />
+            <Input
+              name="ConfPassword"
+              placeholder="Confirm Password"
+              type="password"
+            />
+            <Submit onClick={handleSubmit}>Sign Up!</Submit>
+          </Form>
+        </Center>
+      </Container>
     </>
   );
 };
 
+const Container = styled.div`
+  height: 83vh;
+  margin: -8px -5px 0px -5px;
+`;
+
+const Center = styled.div`
+  background-color: black;
+  width: 425px;
+  position: fixed;
+  margin-top: 175px;
+  margin-left: 420px;
+  border: 1px solid white;
+  padding: 3px;
+`;
+
+const NewAcct = styled.h1`
+  margin-top: 0px;
+  /* background-color: white; */
+  color: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Form = styled.form`
+  margin-left: 70px;
+  margin-top: -5px;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 50%;
-  left: 50%;
   max-width: 280px;
-  background-color: grey;
+  justify-content: center;
+  align-items: center;
+  /*  position: absolute; 
+  margin-top: 195px;
+  margin-left: 545px;
+
+  background-color: black;
+  border: 1px solid white;
+  padding: 15px; */
 `;
 
 const Input = styled.input`
@@ -83,8 +123,10 @@ const Input = styled.input`
 `;
 
 const Submit = styled.button`
-  background-color: var(--primary-color);
-  color: white;
+  background-color: pink;
+  margin-top: 2px;
+  width: 170px;
+  color: black;
   border: none;
 `;
 export default SignUp;

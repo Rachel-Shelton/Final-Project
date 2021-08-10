@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Progress from "./InProgress";
+import { UserContext } from "./UserContext";
 
 const Settings = () => {
+  const { currentUser } = useContext(UserContext);
+  console.log("SCU", currentUser);
+
   return (
     <>
       <Title> Settings </Title>
