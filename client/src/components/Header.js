@@ -5,6 +5,8 @@ import SearchBar from "./SearchBar";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "./UserContext";
 
+import { FiLogOut } from "react-icons/fi";
+
 const Header = () => {
   let history = useHistory();
 
@@ -31,15 +33,16 @@ const Header = () => {
           {reveal && (
             <Menu id="myDropdown" className="dropdown-content">
               <Profile to="/profile">My Profile</Profile>
-              <Wishlist to="/wishlist">My Wishlist</Wishlist>
+              {/* <Wishlist to="/wishlist">My Wishlist</Wishlist> */}
               <Settings to="/settings">Settings</Settings>
               <Logout
                 onClick={() => {
-                  // setCurrentUser(undefined);
+                  setCurrentUser(undefined);
                   localStorage.removeItem("loggedIn");
                   history.push("/");
                 }}
               >
+                {/* <FiLogOut />  */}
                 Log Out
               </Logout>
             </Menu>

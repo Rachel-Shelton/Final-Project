@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-// import Validate from "./ValidateForm";
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 import background from "../background.jpg";
 
@@ -70,6 +71,14 @@ const SignUp = () => {
             />
             <Submit onClick={handleSubmit}>Sign Up!</Submit>
           </Form>
+          <LoginButton>
+            <Login to="/">
+              Return to Log In
+              <Arrow>
+                <HiOutlineArrowNarrowRight />
+              </Arrow>
+            </Login>
+          </LoginButton>
         </Center>
       </Container>
     </>
@@ -128,5 +137,27 @@ const Submit = styled.button`
   width: 170px;
   color: black;
   border: none;
+`;
+
+const LoginButton = styled.button`
+  background-color: pink;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  width: 170px;
+  color: black;
+  border: none;
+  margin-left: 125px;
+`;
+
+const Login = styled(Link)`
+  color: black;
+  text-decoration: none;
+  :visited {
+    color: black;
+  }
+`;
+
+const Arrow = styled.div`
+  margin-top: 1px;
 `;
 export default SignUp;

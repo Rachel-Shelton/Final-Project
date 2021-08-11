@@ -3,19 +3,13 @@ import styled from "styled-components";
 import { PlantContext } from "./PlantContext";
 import { UserContext } from "./UserContext";
 
+import { Link } from "react-router-dom";
+
 const Wishlist = () => {
   const { currentUser } = useContext(UserContext);
   const { wishlist } = useContext(PlantContext);
-  console.log(wishlist);
 
-  //fixed the problem with the below last time but won't work now
-  //becuase I have no fetch to do
-
-  // const [loading, setLoading] = useState(false);
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  // console.log(wishlist);
 
   const createList = () => {
     fetch("/wishlist", {
@@ -32,15 +26,26 @@ const Wishlist = () => {
       });
   };
 
+  console.log(currentUser);
   console.log("WP", wishlist);
   return (
     <>
       <Title>Your Wishlist</Title>
       {wishlist ? (
-        wishlist > 0 ? (
+        wishlist.length > 0 ? (
           wishlist.map((plant) => {
             console.log(plant);
-            return <div>{plant.commonName}</div>;
+            return (
+              <>
+                <NavLink to={`/plant/${plant._id}`}>
+                  <Entry>
+                    <Img src={plant.image} />
+                    <Name>{plant.commonName}</Name>
+                    {/* <Date>Date added: </Date> */}
+                  </Entry>
+                </NavLink>
+              </>
+            );
           })
         ) : (
           <div>Your Wishlist is Empty</div>
@@ -53,8 +58,32 @@ const Wishlist = () => {
 };
 
 const Title = styled.div`
-  margin-top: 5vh;
+  margin: 5px;
 `;
+
+const NavLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  :visited {
+    color: black;
+  }
+`;
+
+const Entry = styled.div`
+  margin: 5px 10px 5px 10px;
+  padding: 5px;
+  border: 1px solid black;
+  display: flex;
+`;
+
+const Img = styled.img`
+  height: 25px;
+  margin-right: 5px;
+`;
+
+const Name = styled.div``;
+
+const Date = styled.div``;
 
 const Create = styled.button``;
 

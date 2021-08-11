@@ -347,7 +347,6 @@ const addWishlist = async (req, res) => {
   let newWishlist = {
     _id,
     userId,
-
     plants: [],
   };
 
@@ -381,9 +380,11 @@ const getWishlist = async (req, res) => {
 
     const db = client.db("PlantParenthood");
 
+    console.log(userId);
     const wishlist = await db.collection("wishlists").findOne({ userId });
-    // console.log(wishlist);
-    if (wishlist !== undefined) {
+
+    console.log(wishlist);
+    if (wishlist.plants.length > 0) {
       res
         .status(200)
         .json({ status: 200, data: wishlist, message: "Wishlist Retrieved" });
@@ -402,8 +403,9 @@ const getWishlist = async (req, res) => {
 
 const updateWishlist = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
-  const { userId, chosenPlant } = req.params;
-  console.log("***", chosenPlant, "***");
+  const { userId } = req.params;
+  const { plant } = req.body;
+  // console.log("***", req.body, "***");
 
   try {
     await client.connect();
@@ -413,11 +415,11 @@ const updateWishlist = async (req, res) => {
 
     const wishlist = await db.collection("wishlists").findOne({ userId });
     ``;
-    // console.log(wishlist);
+    //  console.log(wishlist);
     if (wishlist !== undefined) {
       const updatedWishlist = await db
         .collection("wishlists")
-        .updateOne({ userId }, { $push: { plants: chosenPlant } });
+        .updateOne({ userId }, { $push: { plants: plant } });
       res.status(200).json({
         status: 200,
         data: updatedWishlist,

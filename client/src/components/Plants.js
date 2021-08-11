@@ -111,7 +111,9 @@ const Plants = () => {
             return (
               <NavLink to={`/plant/${plant._id}`}>
                 <Entry>
-                  <Image src={plant.image} />
+                  <ImgDiv>
+                    <Image src={plant.image} />
+                  </ImgDiv>
                   <Info>
                     <Name>Name: {plant.commonName}</Name>
                     <Origin>Origin: {plant.origin}</Origin>
@@ -151,8 +153,6 @@ const UList = styled.ul`
   width: 100%;
 `;
 
-const Label = styled.label``;
-
 const List = styled.li`
   font-size: 12px;
   list-style: none;
@@ -182,23 +182,29 @@ const Entry = styled.div`
   background-color: white;
   border: 1px solid var(--primary-color);
   margin: 5px 5px 5px 10px;
-  height: 120px;
+  height: 80px;
   width: 400px;
   cursor: pointer;
+  display: flex;
+`;
+
+const ImgDiv = styled.div`
+  width: 90px;
 `;
 
 const Image = styled.img`
   float: left;
-  height: 35px;
-  margin: 5px;
+  height: 60px;
+  margin: 10px 5px 5px 5px;
 `;
 
 const Info = styled.div`
-  margin-left: 70px;
+  width: 250px;
+  margin-left: 20px;
 `;
 
 const Name = styled.div`
-  margin-top: 5px;
+  margin-top: 18px;
 `;
 
 const Origin = styled.div``;

@@ -25,18 +25,15 @@ express()
   .use(express.json())
   .use(morgan("dev"))
 
-  //DONE
   //get all plants
   .get("/plants", getPlants)
 
-  //DONE
   //get one plant
   .get("/plant/:_id", getPlant)
 
   // //Change plant info, with updateOne in the function
   // .patch("/plant/:_id", updatePlant)
 
-  //DONE
   // get all users
   .get("/users", getUsers)
 
@@ -44,7 +41,6 @@ express()
   // get one user
   .get("/user/:_id", getUser)
 
-  //DONE
   //add user
   .post("/user", addUser)
 
@@ -52,24 +48,25 @@ express()
   //Change user info, with updateOne in the function
   .patch("/user/:_id", updateUser)
 
-  //DONE
   //Potential, retrieve posts for the feed
   .get("/posts", getPosts)
 
-  //DONE
   //Potential, retrieve posts for the feed
   .get("/post/:_id", getPost)
 
-  //DONE
   //add post to the db and feed
   .post("/post", addPost)
 
+  //For validating the user's username and password on login
   .post("/user/login", Login)
 
+  //To create a wishlist for the user in the database, if they don't have one
   .post("/wishlist", addWishlist)
 
+  //To retrieve the user's wishlist
   .get("/wishlist/:userId", getWishlist)
 
+  //To add plants to the user's wishlist (will eventually be able to remove them too)
   .patch("/wishlist/:userId", updateWishlist)
 
   .use("/assets", express.static(path.join(__dirname, "assets")))

@@ -7,7 +7,8 @@ import { UserContext } from "./UserContext";
 
 const PlantDetails = () => {
   const { currentUser } = useContext(UserContext);
-  const { wishlist, setWishlist } = useContext(PlantContext);
+  const { wishlist, setWishlist, updateList, setUpdateList } =
+    useContext(PlantContext);
   const { _id } = useParams();
   // console.log(_id);
 
@@ -27,18 +28,21 @@ const PlantDetails = () => {
     }
   }, [_id]);
 
-  useEffect(() => {
+  const addPlantToWishlist = (givenPlant) => {
+    console.log("W2", wishlist);
     fetch(`/wishlist/${currentUser.data._id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        // plant: wishlist.commonName,
-        // plant: chosenPlant.commonName,
+        plant: givenPlant,
       }),
+    }).then((data) => {
+      setUpdateList((updateList) => {
+        return !updateList;
+      });
     });
-  }, [chosenPlant]);
+  };
 
-  console.log(chosenPlant);
   console.log("Wishlist", wishlist);
 
   return chosenPlant ? (
@@ -48,11 +52,13 @@ const PlantDetails = () => {
           <Save
             onClick={() => {
               console.log(chosenPlant);
-              setWishlist(chosenPlant);
+              addPlantToWishlist(chosenPlant);
             }}
             role="radio"
           >
-            <GiFlowerPot />
+            <FlowerPot>
+              <GiFlowerPot />
+            </FlowerPot>
           </Save>
           <Top>
             <Image src={chosenPlant.image} />
@@ -92,6 +98,16 @@ const Container = styled.div`
 
 const Save = styled.div`
   margin-left: 90vw;
+`;
+
+const FlowerPot = styled.div`
+  position: absolute;
+  font-size: 45px;
+  margin-top: 12px;
+  margin-right: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Loading = styled.div`

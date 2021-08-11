@@ -24,16 +24,18 @@ const Feed = () => {
         <Title>Feed</Title>
         <div>
           {posts.map((post) => {
-            // console.log(post);
-            return (
-              <NavLink to={`/post/${post._id}`}>
-                <Entry>
-                  <Name>{post.username}</Name>
-                  <Status>{post.status}</Status>
-                  <Timestamp>{post.timestamp}</Timestamp>
-                </Entry>
-              </NavLink>
-            );
+            // console.log(currentUser.data.username, post.username);
+            if (currentUser.data.username !== post.username) {
+              return (
+                <NavLink to={`/post/${post._id}`}>
+                  <Entry>
+                    <Name>{post.username}</Name>
+                    <Status>{post.status}</Status>
+                    <Timestamp>{post.timestamp}</Timestamp>
+                  </Entry>
+                </NavLink>
+              );
+            }
           })}
         </div>
       </Container>
@@ -87,7 +89,7 @@ const Status = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 50px;
-  margin: 10px;
+  margin: 10px 15px 10px 15px;
   padding: 5px;
   border: 1px solid black;
 `;

@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import GlobalStyles from "./GlobalStyles";
 import Community from "./Community";
@@ -30,16 +35,22 @@ function App() {
             <NurseryFinder />
           </Route>
           <div>
-            <Route exact path="/">
-              <LandingPage />
-            </Route>
-
-            <Route path="/signup">
-              <SignUp />
-            </Route>
+            {!currentUser && (
+              <>
+                <Route exact path="/">
+                  <LandingPage />
+                </Route>
+                <Route path="/signup">
+                  <SignUp />
+                </Route>
+              </>
+            )}
             {currentUser && (
               <div>
                 <Header />
+                <Route exact path="/">
+                  <Redirect to="/home" />
+                </Route>
                 <Route path="/home">
                   <Homepage />
                 </Route>
