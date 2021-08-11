@@ -23,7 +23,7 @@ const getPlants = async (req, res) => {
     const db = client.db("PlantParenthood");
 
     const plants = await await db.collection("plants").find().toArray();
-    console.log(plants);
+    // console.log("***", plants, "***");
 
     if (plants.length !== 0) {
       res
@@ -226,7 +226,7 @@ const getPosts = async (req, res) => {
     const db = client.db("PlantParenthood");
 
     const posts = await db.collection("posts").find().toArray();
-    console.log(posts);
+    // console.log(posts);
 
     res.status(200).json({ status: 200, data: posts });
   } catch (err) {
@@ -303,7 +303,7 @@ const Login = async (req, res) => {
 
   let givenUsername = req.body.username;
   let givenPassword = req.body.password;
-
+  console.log(givenUsername, givenPassword);
   //get user from mdb using given username
   //look up user with given user name and compare given password to password in mdb
   //if (p=p, resmjson{data: user form db} else {message: "Wrong Password"} or "User not found")}
@@ -313,11 +313,13 @@ const Login = async (req, res) => {
 
     const db = client.db("PlantParenthood");
 
-    const cUser = await db.collection("users").findOne({ username });
+    const cUser = await db
+      .collection("users")
+      .findOne({ username: givenUsername });
     console.log(cUser);
 
-    if (givenUsername.toLowerCase() === username.toLowerCase()) {
-      if (givenPassword === user.password) {
+    if (givenUsername.toLowerCase() === cUser.username.toLowerCase()) {
+      if (givenPassword === cUser.password) {
         res
           .status(200)
           .json({ status: 200, data: cUser, message: "User Logged In" });
@@ -337,6 +339,103 @@ const Login = async (req, res) => {
   console.log("disconnected");
 };
 
+const addWishlist = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  const _id = uuidv4();
+
+  const { userId } = req.body;
+  let newWishlist = {
+    _id,
+    userId,
+
+    plants: [],
+  };
+
+  try {
+    await client.connect();
+    console.log("connected!");
+
+    const db = client.db("PlantParenthood");
+
+    const wishlist = await db.collection("wishlists").insertOne(newWishlist);
+    // console.log(wishlist);
+    res
+      .status(200)
+      .json({ status: 200, data: newWishlist, message: "Wishlist Added" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
+  }
+
+  client.close();
+  console.log("disconnected");
+};
+
+const getWishlist = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  const { userId } = req.params;
+
+  try {
+    await client.connect();
+    console.log("connected!");
+
+    const db = client.db("PlantParenthood");
+
+    const wishlist = await db.collection("wishlists").findOne({ userId });
+    // console.log(wishlist);
+    if (wishlist !== undefined) {
+      res
+        .status(200)
+        .json({ status: 200, data: wishlist, message: "Wishlist Retrieved" });
+    } else {
+      res
+        .status(404)
+        .json({ status: 404, message: "Unable to retrieve wishlist" });
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
+  }
+  client.close();
+  console.log("disconnected");
+};
+
+const updateWishlist = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  const { userId, chosenPlant } = req.params;
+  console.log("***", chosenPlant, "***");
+
+  try {
+    await client.connect();
+    console.log("connected!");
+
+    const db = client.db("PlantParenthood");
+
+    const wishlist = await db.collection("wishlists").findOne({ userId });
+    ``;
+    // console.log(wishlist);
+    if (wishlist !== undefined) {
+      const updatedWishlist = await db
+        .collection("wishlists")
+        .updateOne({ userId }, { $push: { plants: chosenPlant } });
+      res.status(200).json({
+        status: 200,
+        data: updatedWishlist,
+        message: "Wishlist Updated",
+      });
+    } else {
+      res
+        .status(404)
+        .json({ status: 404, message: "Unable to retrieve wishlist" });
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
+  }
+  client.close();
+  console.log("disconnected");
+};
+
 module.exports = {
   getPlants,
   getPlant,
@@ -349,4 +448,7 @@ module.exports = {
   getPost,
   addPost,
   Login,
+  addWishlist,
+  getWishlist,
+  updateWishlist,
 };

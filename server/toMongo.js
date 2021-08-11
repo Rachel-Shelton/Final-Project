@@ -1,9 +1,9 @@
-const {v4: uuidv4}  = require("uuid")
+const { v4: uuidv4 } = require("uuid");
 
 const plants = [
   // {
   //   //with uu_id?
-//   id: uuidv4(),
+  //   id: uuidv4(),
   //   commonName: "",
   //   //optional
   //   synonyms: "",
@@ -362,7 +362,7 @@ const plants = [
 
   {
     _id: uuidv4(),
-    commonName: "Lady's Slipper Orchid",  //optional
+    commonName: "Lady's Slipper Orchid", //optional
     synonyms: "Showy Lady's Slipper",
     binomialName: "Cypripedium reginae",
     origin: "Northern North America",
@@ -438,7 +438,6 @@ const plants = [
 ];
 
 const posts = [
-
   //{
   //   username: "",
   //   timestamp: "2021-08-2",
@@ -513,7 +512,7 @@ const posts = [
     media: [
       {
         type: "img",
-        url: "/assets/Orch_id-Puuidv4()2.jpg",
+        url: "/assets/Orchid-Pt.2.jpg",
       },
     ],
   },

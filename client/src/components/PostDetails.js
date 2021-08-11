@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import avatar from "../avatar.jpg";
 
 const PostDetails = () => {
   const { _id } = useParams();
@@ -26,20 +27,23 @@ const PostDetails = () => {
 
   return chosenPost ? (
     <>
-      <Entry>
-        <Top>
-          <Title>
-            <Name>{chosenPost.username}</Name>
-            <Status> {chosenPost.status}</Status>
-          </Title>
-        </Top>
-        <Details>
-          {chosenPost.media[0] && <Media src={chosenPost.media[0].url} />}
-          <Timestamp>{chosenPost.timestamp}</Timestamp>
-          <Liked> Liked By: {chosenPost.likedBy}</Liked>
-          <Shared> Shared By: {chosenPost.propagatedBy}</Shared>
-        </Details>
-      </Entry>
+      <Container>
+        <Entry>
+          <Post>
+            <Top>
+              <Avatar src={avatar} />
+              <Name>{chosenPost.username}</Name>
+              <Status>
+                {chosenPost.status}
+                {chosenPost.media[0] && <Media src={chosenPost.media[0].url} />}
+              </Status>
+            </Top>
+          </Post>
+          <Details>
+            <Timestamp>{chosenPost.timestamp}</Timestamp>
+          </Details>
+        </Entry>
+      </Container>
     </>
   ) : (
     <Loading>Loading...</Loading>
@@ -50,24 +54,34 @@ const Loading = styled.div`
   margin-top: 5vh;
 `;
 
+const Container = styled.div`
+  min-height: 72vh;
+`;
+
 const Entry = styled.div`
   position: relative;
-  border: 2px solid var(--primary-color);
+  background-color: var(--primary-color);
   margin-top: 10vh;
   height: 300px;
   width: 95vw;
   cursor: pointer;
 `;
 
-const Top = styled.div`
-  position: absolute;
-  top: 0;
+const Post = styled.div`
+  display: flex;
+  /* background-color: yellow; */
 `;
 
-const Title = styled.div`
-  margin-top: 5px;
-  width: 300px;
-  margin-left: 160px;
+const Top = styled.div`
+  position: relative;
+  top: 0;
+  /* background-color: red; */
+`;
+
+const Avatar = styled.img`
+  width: 65px;
+  margin: 5px;
+  /* background-color: yellow; */
 `;
 
 const Name = styled.div`
@@ -75,31 +89,49 @@ const Name = styled.div`
   display: flex;
   justify-content: left;
   margin-left: 5px;
+  position: absolute;
+  top: 0;
+  margin-top: 5px;
+  width: 300px;
+  margin-left: 95px;
+  /* background-color: orange; */
 `;
 
 const Status = styled.div`
   font-size: 16px;
   font-style: italic;
   display: flex;
-  justify-content: left;
-  margin-left: 50px;
+  justify-content: center;
+  align-items: center;
+  padding: 35px;
+  margin-top: -65px;
+  margin-left: 165px;
+  margin-right: 5px;
+  border: 1px solid black;
+  /* background-color: purple; */
 `;
 
 const Details = styled.div`
   margin-left: 5px;
   position: absolute;
   bottom: 0;
-  height: 45%;
+  margin-bottom: 5px;
+  height: 30%;
   width: 95vw;
+  /* background-color: blue; */
 `;
 
-const Timestamp = styled.div``;
+const Timestamp = styled.div`
+  position: absolute;
+  bottom: 0;
+`;
 
 const Liked = styled.div``;
 
 const Shared = styled.div``;
 
 const Media = styled.img`
+  margin: 5px;
   width: 130px;
 `;
 

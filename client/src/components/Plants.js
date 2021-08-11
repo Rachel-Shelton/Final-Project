@@ -27,6 +27,44 @@ const Plants = () => {
       <Container>
         <Title>Find A Plant</Title>
         <Filter>
+          {/* <UList>
+            <Label>
+              <input
+                onClick={() => {
+                  setFilter(true);
+                }}
+                type="radio"
+              />
+              Light
+            </Label>
+            <Label>
+              <input
+                onClick={() => {
+                  setFilter(true);
+                }}
+                type="radio"
+              />
+              Water
+            </Label>
+            <Label>
+              <input
+                onClick={() => {
+                  setFilter(true);
+                }}
+                type="radio"
+              />
+              Pet-Friendly
+            </Label>
+            <Label>
+              <input
+                onClick={() => {
+                  setFilter(true);
+                }}
+                type="radio"
+              />
+              Care
+            </Label>
+          </UList> */}
           <UList>
             <List
               onClick={() => {
@@ -91,8 +129,9 @@ const Plants = () => {
 };
 
 const Container = styled.div`
-  margin: 5vh 2px 0px 5px;
-  background-color: lightblue;
+  margin: 0px 2px 0px 5px;
+  background-color: var(--primary-color);
+  width: 475px;
 `;
 
 const Title = styled.h1`
@@ -103,6 +142,7 @@ const Title = styled.h1`
 const Filter = styled.div`
   display: flex;
   margin-top: -25px;
+  margin-left: 70px;
 `;
 
 const UList = styled.ul`
@@ -110,6 +150,8 @@ const UList = styled.ul`
   display: flex;
   width: 100%;
 `;
+
+const Label = styled.label``;
 
 const List = styled.li`
   font-size: 12px;
@@ -126,6 +168,9 @@ const List = styled.li`
 const Feed = styled.div``;
 
 const NavLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
   color: black;
   :visited {
@@ -134,9 +179,11 @@ const NavLink = styled(Link)`
 `;
 
 const Entry = styled.div`
+  background-color: white;
   border: 1px solid var(--primary-color);
-  margin: 5px;
-  height: 50px;
+  margin: 5px 5px 5px 10px;
+  height: 120px;
+  width: 400px;
   cursor: pointer;
 `;
 

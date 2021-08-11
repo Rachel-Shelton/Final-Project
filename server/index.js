@@ -14,6 +14,9 @@ const {
   getPost,
   addPost,
   Login,
+  addWishlist,
+  getWishlist,
+  updateWishlist,
 } = require("./handlers.js");
 
 const PORT = 4000;
@@ -62,6 +65,12 @@ express()
   .post("/post", addPost)
 
   .post("/user/login", Login)
+
+  .post("/wishlist", addWishlist)
+
+  .get("/wishlist/:userId", getWishlist)
+
+  .patch("/wishlist/:userId", updateWishlist)
 
   .use("/assets", express.static(path.join(__dirname, "assets")))
   .listen(PORT, () => {

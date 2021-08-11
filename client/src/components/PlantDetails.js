@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { GiFlowerPot } from "react-icons/gi";
+import { PlantContext } from "./PlantContext";
+import { UserContext } from "./UserContext";
 
 const PlantDetails = () => {
+  const { currentUser } = useContext(UserContext);
+  const { wishlist, setWishlist } = useContext(PlantContext);
   const { _id } = useParams();
   // console.log(_id);
 
@@ -22,41 +27,72 @@ const PlantDetails = () => {
     }
   }, [_id]);
 
-  // console.log(chosenPlant);
+  useEffect(() => {
+    fetch(`/wishlist/${currentUser.data._id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        // plant: wishlist.commonName,
+        // plant: chosenPlant.commonName,
+      }),
+    });
+  }, [chosenPlant]);
+
+  console.log(chosenPlant);
+  console.log("Wishlist", wishlist);
 
   return chosenPlant ? (
     <>
-      <Entry>
-        <Top>
-          <Image src={chosenPlant.image} />
-          <Title>
-            <Name>{chosenPlant.commonName}</Name>
-            <BName> {chosenPlant.binomialName}</BName>
-          </Title>
-        </Top>
-        <Details>
-          <Origin>Origin: {chosenPlant.origin}</Origin>
-          {/* <Pets>
+      <Container>
+        <Entry>
+          <Save
+            onClick={() => {
+              console.log(chosenPlant);
+              setWishlist(chosenPlant);
+            }}
+            role="radio"
+          >
+            <GiFlowerPot />
+          </Save>
+          <Top>
+            <Image src={chosenPlant.image} />
+            <Title>
+              <Name>{chosenPlant.commonName}</Name>
+              <BName> {chosenPlant.binomialName}</BName>
+            </Title>
+          </Top>
+          <Details>
+            <Origin>Origin: {chosenPlant.origin}</Origin>
+            {/* <Pets>
             Pet-Friendly: {chosenPlant.petFriendly === false ? "false" : "true"}
           </Pets> */}
-          <Care>Level of Care: {chosenPlant.care}</Care>
-          <Water>Frequency of Watering: {chosenPlant.water}</Water>
-          <Light>Amount of Light: {chosenPlant.light}</Light>
-          <Medium>Growing Medium: {chosenPlant.growingMedium}</Medium>
-          <Propagation>
-            Propagation Methods: {chosenPlant.propogation}
-          </Propagation>
-          <Synonyms>Also Goes By: {chosenPlant.synonyms}</Synonyms>
-        </Details>
-      </Entry>
-      <Suggestions>
-        <Siblings>Similar to: {chosenPlant.siblings}</Siblings>
-      </Suggestions>
+            <Care>Level of Care: {chosenPlant.care}</Care>
+            <Water>Frequency of Watering: {chosenPlant.water}</Water>
+            <Light>Amount of Light: {chosenPlant.light}</Light>
+            <Medium>Growing Medium: {chosenPlant.growingMedium}</Medium>
+            <Propagation>
+              Propagation Methods: {chosenPlant.propogation}
+            </Propagation>
+            <Synonyms>Also Goes By: {chosenPlant.synonyms}</Synonyms>
+          </Details>
+        </Entry>
+        <Suggestions>
+          <Siblings>Similar to: {chosenPlant.siblings}</Siblings>
+        </Suggestions>
+      </Container>
     </>
   ) : (
     <Loading>Loading...</Loading>
   );
 };
+
+const Container = styled.div`
+  min-height: 72vh;
+`;
+
+const Save = styled.div`
+  margin-left: 90vw;
+`;
 
 const Loading = styled.div`
   margin-top: 5vh;
@@ -69,7 +105,6 @@ const Entry = styled.div`
   height: 300px;
   width: 95vw;
   cursor: pointer;
-  /* background-color: orange; */
 `;
 
 const Top = styled.div`
@@ -82,11 +117,6 @@ const Image = styled.img`
   height: 150px;
   margin: 5px;
 `;
-
-// const Info = styled.div`
-//   margin-left: 70px;
-//   background-color: grey;
-// `;
 
 const Title = styled.div`
   margin-top: 5px;
@@ -135,7 +165,7 @@ const Synonyms = styled.div``;
 
 const Suggestions = styled.div`
   position: absolute;
-  bottom: 50px;
+  margin-top: 25px;
 `;
 
 const Siblings = styled.div``;

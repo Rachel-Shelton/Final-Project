@@ -24,17 +24,19 @@ const Header = () => {
           <SearchBar />
         </Search>
         <Home to="/home">Plant Parenthood</Home>
-        <div class="dropdown">
-          <User onClick={showDropdown} class="dropbtn">
+        <div className="dropdown">
+          <User onClick={showDropdown} className="dropbtn">
             User
           </User>
           {reveal && (
-            <Menu id="myDropdown" class="dropdown-content">
+            <Menu id="myDropdown" className="dropdown-content">
               <Profile to="/profile">My Profile</Profile>
+              <Wishlist to="/wishlist">My Wishlist</Wishlist>
               <Settings to="/settings">Settings</Settings>
               <Logout
                 onClick={() => {
                   // setCurrentUser(undefined);
+                  localStorage.removeItem("loggedIn");
                   history.push("/");
                 }}
               >
@@ -49,18 +51,20 @@ const Header = () => {
 };
 
 const Head = styled.div`
-  position: fixed;
+  margin-bottom: -25px;
   margin-top: 5px;
   top: 0;
   display: flex;
   justify-content: space-between;
   background-color: lightgrey;
-  width: 97vw;
+  width: 98vw;
 `;
 
 const Search = styled.div``;
 
 const Home = styled(Link)`
+  font-size: 35px;
+  font-weight: bold;
   text-decoration: none;
   color: var(--primary-color);
   :visited {
@@ -69,9 +73,17 @@ const Home = styled(Link)`
 `;
 
 const User = styled.button`
+  margin-top: 8px;
+  margin-right: 10px;
+  margin-left: -7px;
+  margin-bottom: -10px;
+  display: flex;
+  justify-content: left;
+  font-size: 15px;
+  font-family: "Garamond", serif;
   background-color: lightgrey;
+  color: var(--primary-color);
   border: none;
-  margin-right: 30px;
   height: 25px;
 `;
 
@@ -81,20 +93,37 @@ const Menu = styled.div`
 `;
 
 const Profile = styled(Link)`
+  color: var(--primary-color);
   text-decoration: none;
   :visited {
-    color: black;
+    color: var(--primary-color);
+  }
+`;
+
+const Wishlist = styled(Link)`
+  margin-right: 5px;
+  color: var(--primary-color);
+  text-decoration: none;
+  :visited {
+    color: var(--primary-color);
   }
 `;
 
 const Settings = styled(Link)`
+  color: var(--primary-color);
   text-decoration: none;
   :visited {
-    color: black;
+    color: var(--primary-color);
   }
 `;
 
 const Logout = styled.button`
+  margin-left: -7px;
+  display: flex;
+  justify-content: left;
+  font-size: 15px;
+  font-family: "Garamond", serif;
+  color: var(--primary-color);
   background-color: lightgrey;
   border: none;
 `;

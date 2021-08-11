@@ -65,6 +65,8 @@ const nurseries = [
     "Serres Riel",
     45.52534,
     -73.60402,
+    "Address: 138 Atwater Ave, Montreal, Quebec H4C 2H6",
+    ,
     "Website: https://serresriel.com/",
     "Phone#: 450.454.9425",
   ],
@@ -73,6 +75,7 @@ const nurseries = [
     "Botanista Plants",
     45.51241,
     -73.55469,
+    "Address: Montreal, Quebec H3B 1X8",
     "Website: https://botanistaplants.ca/",
     "Phone#: N/A",
   ],
@@ -81,6 +84,7 @@ const nurseries = [
     "Centre Jardin Atwater",
     45.47824,
     -73.57697,
+    "Address: ",
     "Website: http://www.centrejardinatwater.com/",
     "Phone#: 514.933.7817",
   ],
@@ -89,6 +93,7 @@ const nurseries = [
     "West Island Nursery/Pepiniere de l'ouest Inc.",
     45.46361,
     -73.87157,
+    "Address: 3025 St Ambroise St, Montreal, Quebec H4C 2C2",
     "Website: https://westislandnursery.com/",
     "Phone#: .514.620.2615",
   ],
@@ -97,6 +102,7 @@ const nurseries = [
     "Vertuose Inc",
     45.52523,
     -73.59759,
+    "Address: 5409 St Laurent Blvd, Montreal, Quebec H2T 1S5",
     "Website: https://www.vertuose.com/",
     "Phone#: 514.276.4048",
   ],
@@ -105,6 +111,7 @@ const nurseries = [
     "Tropical 1",
     45.43699,
     -73.86295,
+    "Address: 650-4141 Sherbrooke St West Montreal, Quebec H3Z 1B8",
     "Website: https://www.tropical-1.com/",
     "Phone#: 514.989.1977",
   ],
@@ -113,6 +120,7 @@ const nurseries = [
     "Planterra",
     45.47611,
     -73.78465,
+    "Address: 2275 St François Rd, Dorval, Quebec H9P 1K3",
     "Website: https://www.planterra.ca/",
     "Phone#: 1.877.648.1711",
   ],
@@ -121,6 +129,7 @@ const nurseries = [
     "Angel Jardins",
     45.47998,
     -73.57648,
+    "Address: 138 Atwater Ave, Montreal, Quebec H4C 2H6",
     "Website: N/A",
     "Phone#: 514.938.8780",
   ],
@@ -129,6 +138,7 @@ const nurseries = [
     "Urban Seedling",
     45.4363,
     -73.5846,
+    "Address: 7000 Bd LaSalle, Verdun, QC H4H 2S9",
     "Website: https://www.urbanseedling.com/garden-center/",
     "Phone#: N/A ",
   ],
@@ -137,6 +147,7 @@ const nurseries = [
     "Dragon Flowers",
     45.52534,
     -73.60402,
+    "Address: 159 Rue Bernard Ouest, Montréal, QC H2T 2K3",
     "Website: N/A",
     "Phone#: 514.278.8818",
   ],
@@ -174,9 +185,6 @@ const NurseryFinder = () => {
           {nurseries.map((nursery) => (
             <Marker
               position={{ lat: nursery[1], lng: nursery[2] }}
-              // icon={{
-              //   scaledSize: new window.google.maps.Size(10, 10),
-              // }}
               onClick={() => {
                 setSelected(nursery);
               }}
@@ -193,6 +201,7 @@ const NurseryFinder = () => {
                 <h2> {selected[0]}</h2>
                 <p>{selected[3]} </p>
                 <p>{selected[4]} </p>
+                <p>{selected[5]} </p>
               </div>
             </InfoWindow>
           ) : null}

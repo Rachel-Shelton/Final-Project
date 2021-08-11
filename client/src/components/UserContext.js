@@ -7,20 +7,27 @@ export const UserProvider = ({ children }) => {
   const [users, setUsers] = useState(undefined);
 
   useEffect(() => {
-    fetch("/user/login")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        let userStorage = localStorage.getItem("loggedIn");
-        if (userStorage) {
-          if (data) {
-            setCurrentUser(data);
-          }
-        }
-      });
+    let userStorage = localStorage.getItem("loggedIn");
+    if (userStorage) {
+      const foundStorage = JSON.parse(userStorage);
+
+      fetch("/user/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: foundStorage.username,
+          password: foundStorage.password,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setCurrentUser(data);
+        });
+    }
   }, []);
 
-  console.log(currentUser);
+  // console.log(currentUser);
 
   return (
     <UserContext.Provider

@@ -15,53 +15,36 @@ const LandingPage = () => {
 
   // console.log(users);
 
-  let findCurrentUser = users
-    ? users.filter((user) => {
-        // console.log(user.name);
-        return (
-          user.username.toLowerCase() === username.toLowerCase() &&
-          user.password === password
-        );
-      })
-    : [];
-  console.log(findCurrentUser);
+  // let findCurrentUser = users
+  //   ? users.filter((user) => {
+  //       // console.log(user.name);
+  //       return (
+  //         user.username.toLowerCase() === username.toLowerCase() &&
+  //         user.password === password
+  //       );
+  //     })
+  //   : [];
+  // console.log(findCurrentUser);
 
   let history = useHistory();
 
   let userProf = () => {
-    if (findCurrentUser !== undefined) {
-      setCurrentUser(findCurrentUser);
-      console.log(currentUser);
-      localStorage.setItem("loggedIn", username, password);
-      return history.push("/home");
-    } else {
-      return alert("User Not Found");
-    }
-  };
-
-  let validateUsername = () => {
-    console.log(currentUser);
-    if (currentUser) {
-      if (currentUser.email && currentUser.username === username) {
-        return true;
-      } else {
-        setError({ message: "Username Incorrect" });
-        return false;
-      }
-    }
-    return false;
-  };
-
-  let validatePassword = () => {
-    if (currentUser) {
-      if (currentUser.email && currentUser.password === password) {
-        return true;
-      } else {
-        setError({ message: "Password Incorrect" });
-        return false;
-      }
-    }
-    return false;
+    console.log();
+    fetch("/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        localStorage.setItem("loggedIn", JSON.stringify(data));
+        // console.log(data);
+        setCurrentUser(data);
+        history.push("/home");
+      });
   };
 
   return (
@@ -74,6 +57,7 @@ const LandingPage = () => {
             <Username
               value={username}
               onChange={(ev) => {
+                // console.log(ev.target.value, ev.target);
                 setUsername(ev.target.value);
               }}
               type="text"
@@ -82,13 +66,14 @@ const LandingPage = () => {
             <Password
               value={password}
               onChange={(ev) => {
+                // console.log(ev.target.value, ev.target);
                 setPassword(ev.target.value);
               }}
               type="password"
               placeholder="Password"
             />
             <Submit>
-              {validateUsername() && validatePassword() ? (
+              {username.length > 1 && password.length > 1 ? (
                 <Auth onClick={userProf}>Log In</Auth>
               ) : (
                 <Auth isDisabled>Log In</Auth>

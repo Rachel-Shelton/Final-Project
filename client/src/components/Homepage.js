@@ -4,13 +4,15 @@ import styled from "styled-components";
 import Plants from "./Plants";
 import Feed from "./Feed";
 
+import background from "../background.jpg";
+
 const Homepage = () => {
   return (
     <>
       {/* <NavBar>
         <Navigation />
       </NavBar> */}
-      <Container>
+      <Container style={{ backgroundImage: `url(${background})` }}>
         <PlantFeed>
           <Plants />
         </PlantFeed>
@@ -27,19 +29,19 @@ const Homepage = () => {
 // `;
 
 const Container = styled.div`
+  margin-top: 30px;
   display: flex;
 `;
 
 const PlantFeed = styled.div`
-  /* background-color: lightblue; */
   width: 50vw;
-  margin-right: 2px;
+  margin-left: 65px;
+  margin-bottom: 25px;
 `;
 
 const PostFeed = styled.div`
-  /* background-color: grey; */
   width: 50vw;
-  margin-left: 2px;
+  margin-bottom: 0px;
 `;
 
 export default Homepage;

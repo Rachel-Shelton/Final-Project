@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { BiSearchAlt } from "react-icons/bi";
 
 const Search = () => {
   const [searchValue, setSearchValue] = useState("");
   const [searchList, setSearchList] = useState(undefined);
+  const [clicked, setClicked] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -38,12 +40,36 @@ const Search = () => {
     <>
       <div>
         <SearchDiv>
-          <Input
-            value={searchValue}
-            onChange={(ev) => setSearchValue(ev.target.value)}
-            disabled={!searchList}
-            placeholder="Search"
-          />
+          {clicked ? (
+            <>
+              <All>
+                <AltIcon>
+                  <BiSearchAlt
+                    onClick={() => {
+                      setClicked(false);
+                    }}
+                  />
+                </AltIcon>
+                <Input
+                  value={searchValue}
+                  onChange={(ev) => {
+                    setSearchValue(ev.target.value);
+                  }}
+                  disabled={!searchList}
+                  placeholder="Search"
+                />
+              </All>
+            </>
+          ) : (
+            <Icon>
+              <BiSearchAlt
+                onClick={() => {
+                  setClicked(true);
+                }}
+              />
+            </Icon>
+          )}
+
           <UList>
             {suggestionMatch && (
               <Container>
@@ -72,13 +98,28 @@ const Search = () => {
   );
 };
 
-const SearchDiv = styled.div`
-  /* @media (max-width: 768px) {
-    display: none;
-  } */
+const SearchDiv = styled.div``;
+
+const Icon = styled.div`
+  font-size: 20px;
+  color: green;
+  margin-top: 10px;
+  margin-left: 10px;
+`;
+
+const All = styled.div`
+  display: flex;
+`;
+
+const AltIcon = styled.div`
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
 `;
 
 const Input = styled.input`
+  margin-top: 5px;
+  margin-left: 5px;
   width: 200px;
   border: 1px solid lightgrey;
   padding: 5px;
